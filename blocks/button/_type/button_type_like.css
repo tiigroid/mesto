@@ -1,0 +1,6 @@
+.button_type_like {
+  background-image: url(../../../images/icon_like.svg);
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+}

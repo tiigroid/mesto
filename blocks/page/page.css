@@ -1,7 +1,9 @@
 .page {
-  max-width: 880px;
-  margin: 45px auto 60px auto;
-  padding: 0 19px;
-  display: grid;
-  grid-template-rows: auto 40px auto 67px auto;
+  margin: 45px auto 60px;
+}
+
+@media screen and (max-width: 425px) {
+  .page {
+    margin: 28px auto 36px auto;
+  }
 }
