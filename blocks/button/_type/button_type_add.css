@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.button_type_add:hover {
+  opacity: .6;
+}
+
+
 @media screen and (max-width: 425px) {
   .button_type_add {
     margin: 0 auto;

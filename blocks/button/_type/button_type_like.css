@@ -4,3 +4,11 @@
   height: 19px;
   cursor: pointer;
 }
+
+.button_type_like:hover {
+  opacity: .5;
+}
+
+.button_type_like:visited {
+  background-image: url(../../../images/icon_like-active.svg);
+}
