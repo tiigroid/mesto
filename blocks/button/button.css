@@ -5,6 +5,7 @@
   border: none;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .button:hover {

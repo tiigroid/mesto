@@ -1,0 +1,9 @@
+.button_type_save {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  text-align: center;
+}
