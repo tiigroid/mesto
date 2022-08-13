@@ -1,33 +1,35 @@
-let popupSection = document.querySelector('.popup');
-let profileEditButton = document.querySelector('.profile__button-edit');
-
-profileEditButton.addEventListener('click', function openProfileEdit () {
-  popupSection.classList.add('popup_opened');
-});
-
-let profilePopupCloseButton = document.querySelector('.popup__button-close');
-
-profilePopupCloseButton.addEventListener('click', function closeProfileEdit () {
-  popupSection.classList.remove('popup_opened');
-});
-
+let popup = document.querySelector('.popup');
+let popupButtonClose = document.querySelector('.popup__button-close');
+let popupForm = document.querySelector('.popup__container');
 let popupName = document.querySelector('.popup__name');
-let profileName = document.querySelector('.profile__name');
 let popupStatus = document.querySelector('.popup__status');
+let profileName = document.querySelector('.profile__name');
 let profileStatus = document.querySelector('.profile__status');
+let profileButtonEdit = document.querySelector('.profile__button-edit');
 
-popupName.placeholder = profileName.textContent;
-popupStatus.placeholder = profileStatus.textContent;
+function popupToggle () {
+  popup.classList.toggle('popup_opened');
+  popupName.value = '';
+  popupStatus.value = '';
+  popupName.placeholder = profileName.textContent;
+  popupStatus.placeholder = profileStatus.textContent;
+  popupName.classList.remove('red-placeholder');
+  popupStatus.classList.remove('red-placeholder');
+};
+function submitPopupForm (evt) {
+  evt.preventDefault();
+  if (popupName.value.length === 0 || popupStatus.value.length === 0) {
+    popupName.placeholder = 'Необходимо заполнить оба поля :)';
+    popupStatus.placeholder = 'Необходимо заполнить оба поля :)';
+    popupName.classList.add('red-placeholder');
+    popupStatus.classList.add('red-placeholder');
+    } else {
+    profileName.textContent = popupName.value;
+    profileStatus.textContent = popupStatus.value;
+    popupToggle();
+    };
+};
 
-let profilePopupSubmitButton = document.querySelector('.popup__button-save');
-
-
-profilePopupSubmitButton.addEventListener('click', function saveProfileEdit () {
-  profileName.textContent = popupName.value;
-  profileStatus.textContent = popupStatus.value;
-  popupSection.classList.remove('popup_opened');
-  popupName.placeholder = popupName.value;
-  popupStatus.placeholder = popupStatus.value;
-  popupName.value = null;
-  popupStatus.value = null;
-});
+profileButtonEdit.addEventListener('click', popupToggle);
+popupButtonClose.addEventListener('click', popupToggle);
+popupForm.addEventListener('submit', submitPopupForm);
