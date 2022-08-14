@@ -19,8 +19,8 @@ function popupToggle () {
 function submitPopupForm (evt) {
   evt.preventDefault();
   if (popupName.value.length === 0 || popupStatus.value.length === 0) {
-    popupName.placeholder = 'Необходимо заполнить оба поля :)';
-    popupStatus.placeholder = 'Необходимо заполнить оба поля :)';
+    popupName.placeholder = 'Обязательно к заполнению :)';
+    popupStatus.placeholder = 'Обязательно к заполнению :)';
     popupName.classList.add('red-placeholder');
     popupStatus.classList.add('red-placeholder');
     } else {
@@ -33,3 +33,17 @@ function submitPopupForm (evt) {
 profileButtonEdit.addEventListener('click', popupToggle);
 popupButtonClose.addEventListener('click', popupToggle);
 popupForm.addEventListener('submit', submitPopupForm);
+popupName.addEventListener('focus', function clearPlaceholder () {
+  popupName.placeholder = '';
+});
+popupStatus.addEventListener('focus', function clearPlaceholder () {
+  popupStatus.placeholder = '';
+});
+popupName.addEventListener('blur', function returnNamePlaceholder () {
+  popupName.placeholder = profileName.textContent;
+  popupName.classList.remove('red-placeholder');
+});
+popupStatus.addEventListener('blur', function returnStatusPlaceholder () {
+  popupStatus.placeholder = profileStatus.textContent;
+  popupStatus.classList.remove('red-placeholder');
+});
