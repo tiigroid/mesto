@@ -2,15 +2,16 @@
   width: 100%;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-  outline: none;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 27px 0 10px;
+  margin: 19px 0;
+  padding: 8px 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: black;
-  align-self: start;
 }
 
-
+.popup__text-input:focus {
+  border: none;
+  border-radius: 1px;
+  outline: 2px solid rgba(0, 0, 0, .2);;
+}

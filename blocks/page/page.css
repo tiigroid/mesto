@@ -1,9 +1,8 @@
 .page {
-  position: relative;
   margin: 45px auto 60px;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 531px) {
   .page {
     margin: 28px auto 36px auto;
   }

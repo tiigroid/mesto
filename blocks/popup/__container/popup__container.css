@@ -1,9 +1,8 @@
 .popup__container {
-  position: fixed;
-  left: calc(50% - 215px);
-  top: calc(50% - 165px);
-  width: 430px;
-  height: 330px;
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 330px;
   background-color: white;
   border-radius: 10px;
   box-sizing: border-box;
@@ -13,12 +12,12 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 531px) {
   .popup__container {
+    max-width: 474px;
+    min-width: 282px;
+    margin: 0 19px;
+    min-height: 322px;
     padding: 25px 22px;
-    left: calc(50% - 141px);
-    top: calc(50% - 161px);
-    width: 282px;
-    height: 322px;
   }
 }

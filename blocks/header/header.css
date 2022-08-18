@@ -4,7 +4,14 @@
   max-width: 880px;
 }
 
-@media screen and (max-width: 425px) {
+.header::after {
+  content: '';
+  background: url(../../images/line.svg);
+  display: block;
+  height: 1px;
+}
+
+@media screen and (max-width: 531px) {
   .header {
     padding: 0;
   }
