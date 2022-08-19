@@ -6,7 +6,7 @@
 
 .header::after {
   content: '';
-  background: url(../../images/line.svg);
+  background-color: rgba(84, 84, 84, .7);
   display: block;
   height: 1px;
 }
