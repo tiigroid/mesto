@@ -51,9 +51,6 @@ const profileStatus = document.querySelector('.profile__status');
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const page = document.querySelector(".page");
 const popupTemplate = document.querySelector("#popup").content;
-const profileName = document.querySelector(".profile__name");
-const profileStatus = document.querySelector(".profile__status");
-const profileButtonEdit = document.querySelector(".profile__button-edit");
 const profileButtonAdd = document.querySelector(".profile__button-add");
 
 profileButtonEdit.addEventListener("click", createPopupEdit);
