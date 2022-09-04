@@ -10,6 +10,7 @@
 @import url(../blocks/button/_type/button_type_save.css);
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_like.css);
+@import url(../blocks/button/_type/button_type_delete.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -30,6 +31,7 @@
 @import url(../blocks/gallery/__box/gallery__box.css);
 @import url(../blocks/gallery/__title/gallery__title.css);
 @import url(../blocks/gallery/__button-like/gallery__button-like.css);
+@import url(../blocks/gallery/__button-delete/gallery__button-delete.css);
 
 @import url(../blocks/footer/footer.css);
 

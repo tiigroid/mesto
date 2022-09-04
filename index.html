@@ -28,93 +28,29 @@
           ></button>
         </section>
         <section class="gallery">
-          <article class="gallery__card">
-            <img
-              class="gallery__image"
-              src="./images/place_bay-of-fires.png"
-              alt="Залив Файерс"
-            />
-            <div class="gallery__box">
-              <h2 class="gallery__title">Залив Файерс</h2>
-              <button
-                type="button"
-                class="gallery__button-like button button_type_like"
-              ></button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              class="gallery__image"
-              src="./images/place_san-diego.png"
-              alt="Сан-Диего"
-            />
-            <div class="gallery__box">
-              <h2 class="gallery__title">Сан-Диего</h2>
-              <button
-                type="button"
-                class="gallery__button-like button button_type_like"
-              ></button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              class="gallery__image"
-              src="./images/place_cape-breton.png"
-              alt="Кейп-Бретон"
-            />
-            <div class="gallery__box">
-              <h2 class="gallery__title">Кейп-Бретон</h2>
-              <button
-                type="button"
-                class="gallery__button-like button button_type_like"
-              ></button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              class="gallery__image"
-              src="./images/place_morro-bay.png"
-              alt="Морро Бэй"
-            />
-            <div class="gallery__box">
-              <h2 class="gallery__title">Морро Бэй</h2>
-              <button
-                type="button"
-                class="gallery__button-like button button_type_like"
-              ></button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              class="gallery__image"
-              src="./images/place_new-zealand.png"
-              alt="Новая Зеландия"
-            />
-            <div class="gallery__box">
-              <h2 class="gallery__title">Новая Зеландия</h2>
-              <button
-                type="button"
-                class="gallery__button-like button button_type_like"
-              ></button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              class="gallery__image"
-              src="./images/place_saint-petersburg.png"
-              alt="Санкт-Петербург"
-            />
-            <div class="gallery__box">
-              <h2 class="gallery__title">Санкт-Петербург</h2>
-              <button
-                type="button"
-                class="gallery__button-like button button_type_like"
-              ></button>
-            </div>
-          </article>
         </section>
       </main>
       <footer class="footer">© 2022 Mesto Russia</footer>
+      <template id="gallery__card">
+        <article class="gallery__card">
+          <img
+            class="gallery__image"
+            src=""
+            alt=""
+          />
+          <button
+          type="button"
+          class="gallery__button-delete button button_type_delete"
+        ></button>
+          <div class="gallery__box">
+            <h2 class="gallery__title"></h2>
+            <button
+              type="button"
+              class="gallery__button-like button button_type_like"
+            ></button>
+          </div>
+        </article>
+      </template>
       <template id="popup">
         <div class="popup">
           <form class="popup__container">
