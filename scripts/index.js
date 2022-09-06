@@ -73,18 +73,13 @@ function fillPopupFormEdit() {
   popupFormEditInputStatus.value = profileStatus.textContent;
 }
 
-function fillPopupFormAdd() {
-  popupFormAddInputPlace.value = '';
-  popupFormAddInputLink.value = '';
-}
-
 profileButtonEdit.addEventListener('click', () => {
   fillPopupFormEdit();
   openPopup(popupEdit);
 });
 
 profileButtonAdd.addEventListener('click', () => {
-  fillPopupFormAdd();
+  popupFormAdd.reset();
   openPopup(popupAdd);
 });
 
