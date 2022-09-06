@@ -7,7 +7,7 @@
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_close.css);
-@import url(../blocks/button/_type/button_type_save.css);
+@import url(../blocks/button/_type/button_type_submit.css);
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_like.css);
 @import url(../blocks/button/_type/button_type_liked.css);
@@ -38,14 +38,14 @@
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__button-close/popup__button-close.css);
+@import url(../blocks/popup/_type/popup__type_form.css);
+@import url(../blocks/popup/_type/popup__type_fullview.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__button-save/popup__button-save.css);
+@import url(../blocks/popup/__button-submit/popup__button-submit.css);
+@import url(../blocks/popup/__fullview/popup__fullview.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__caption/popup__caption.css);
 
-@import url(../blocks/fullview/fullview.css);
-@import url(../blocks/fullview/__container/fullview__container.css);
-@import url(../blocks/fullview/__button-close/fullview__button-close.css);
-@import url(../blocks/fullview/__caption/fullview__caption.css);
-@import url(../blocks/fullview/__image/fullview__image.css);
