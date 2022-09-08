@@ -30,12 +30,13 @@ initialCards.forEach((card) => {
 
 function makeCard(place, link) {
   const galleryCard = galleryCardTemplate.querySelector('.gallery__card').cloneNode(true);
-  galleryCard.querySelector('.gallery__title').textContent = place;
-  galleryCard.querySelector('.gallery__image').alt = place;
-  galleryCard.querySelector('.gallery__image').src = link;
   const buttonDelete = galleryCard.querySelector('.gallery__button-delete');
   const buttonLike = galleryCard.querySelector('.gallery__button-like');
   const galleryImage = galleryCard.querySelector('.gallery__image');
+  const galleryTitle = galleryCard.querySelector('.gallery__title');
+  galleryTitle.textContent = place;
+  galleryImage.alt = place;
+  galleryImage.src = link;
   buttonDelete.addEventListener('click', deleteCard);
   buttonLike.addEventListener('click', toggleLike);
   galleryImage.addEventListener('click', openPopupFullview);

@@ -20,13 +20,13 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__status">Исследователь океана</p>
             <button
-              aria-label="edit"
+              aria-label="редактировать профиль"
               type="button"
               class="profile__button-edit button button_type_edit"
             ></button>
           </div>
           <button
-            aria-label="add"
+            aria-label="добавить место"
             type="button"
             class="profile__button-add button button_type_add"
           ></button>
@@ -35,9 +35,9 @@
       </main>
       <footer class="footer">© 2022 Mesto Russia</footer>
       <section class="popup popup_type_form">
-        <form class="popup__form popup__form_type_edit">
+        <form novalidate class="popup__form popup__form_type_edit">
           <button
-            aria-label="close"
+            aria-label="закрыть"
             type="button"
             class="popup__button-close button button_type_close"
           ></button>
@@ -45,12 +45,10 @@
           <input
             type="text"
             class="popup__input popup__input_type_name"
-            required
           />
           <input
             type="text"
             class="popup__input popup__input_type_status"
-            required
           />
           <button
             type="submit"
@@ -61,9 +59,9 @@
         </form>
       </section>
       <section class="popup popup_type_form">
-        <form class="popup__form popup__form_type_add">
+        <form novalidate class="popup__form popup__form_type_add">
           <button
-            aria-label="close"
+            aria-label="закрыть"
             type="button"
             class="popup__button-close button button_type_close"
           ></button>
@@ -72,13 +70,11 @@
             type="text"
             class="popup__input popup__input_type_place"
             placeholder="Название"
-            required
           />
           <input
             type="url"
             class="popup__input popup__input_type_link"
             placeholder="Ссылка на картинку"
-            required
           />
           <button
             type="submit"
@@ -91,7 +87,7 @@
       <section class="popup popup_type_fullview">
         <div class="popup__fullview">
           <button
-            aria-label="close"
+            aria-label="закрыть"
             type="button"
             class="popup__button-close button button_type_close"
           ></button>
@@ -103,14 +99,14 @@
         <article class="gallery__card">
           <img class="gallery__image" src="#" alt="" />
           <button
-            aria-label="delete"
+            aria-label="удалить"
             type="button"
             class="gallery__button-delete button button_type_delete"
           ></button>
           <div class="gallery__box">
             <h2 class="gallery__title"></h2>
             <button
-              aria-label="like"
+              aria-label="лайкнуть"
               type="button"
               class="gallery__button-like button button_type_like"
             ></button>
