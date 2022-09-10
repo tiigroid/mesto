@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <script defer src="./scripts/cards.js"></script>
     <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/validate.js"></script>
     <title>Mesto Russia</title>
   </head>
   <body class="root">
@@ -43,13 +44,23 @@
           ></button>
           <h3 class="popup__title">Редактировать профиль</h3>
           <input
+            id="name-input"
+            required
+            minlength="2"
+            maxlength="40"
             type="text"
             class="popup__input popup__input_type_name"
           />
+          <span class="name-input-error popup__error"></span>
           <input
+            id="status-input"
+            required
+            minlength="2"
+            maxlength="200"
             type="text"
             class="popup__input popup__input_type_status"
           />
+          <span class="status-input-error popup__error"></span>
           <button
             type="submit"
             class="popup__button-submit button button_type_submit"
@@ -67,15 +78,23 @@
           ></button>
           <h3 class="popup__title">Новое место</h3>
           <input
+            id="place-input"
+            required
+            minlength="2"
+            maxlength="30"
             type="text"
             class="popup__input popup__input_type_place"
             placeholder="Название"
           />
+          <span class="place-input-error popup__error"></span>
           <input
+            id="link-input"
+            required
             type="url"
             class="popup__input popup__input_type_link"
             placeholder="Ссылка на картинку"
           />
+          <span class="link-input-error popup__error"></span>
           <button
             type="submit"
             class="popup__button-submit button button_type_submit"
