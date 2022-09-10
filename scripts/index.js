@@ -100,13 +100,12 @@ profileButtonAdd.addEventListener('click', () => {
   openPopup(popupAdd);
 });
 
-popupFormEdit.addEventListener('submit', (evt) => {
+popupFormEdit.addEventListener('submit', () => {
   changeProfile();
   closePopup(popupEdit);
 });
 
-popupFormAdd.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+popupFormAdd.addEventListener('submit', () => {
   addCard(makeCard(popupFormAddInputPlace.value, popupFormAddInputLink.value));
   closePopup(popupAdd);
 });

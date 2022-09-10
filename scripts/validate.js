@@ -62,7 +62,9 @@ function validateAllInputs(popupInputs) {
 function toggleSubmitButton (popupInputs, popupButtonSubmit, validationSettings) {
   if (validateAllInputs(popupInputs)) {
     popupButtonSubmit.classList.add(validationSettings.inactiveButtonClass);
+    popupButtonSubmit.disabled = true;
   } else {
     popupButtonSubmit.classList.remove(validationSettings.inactiveButtonClass);
+    popupButtonSubmit.disabled = false;
   }
 };
