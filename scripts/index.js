@@ -5,10 +5,6 @@ const profileButtonAdd = document.querySelector('.profile__button-add');
 
 const popups = document.querySelectorAll('.popup');
 
-const popupsWithForms = document.querySelectorAll('.popup_type_form');
-const popupEdit = popupsWithForms[0];
-const popupAdd = popupsWithForms[1];
-
 const popupFormEdit = document.querySelector('.popup__form_type_edit');
 const popupFormEditInputName = document.querySelector('.popup__input_type_name');
 const popupFormEditInputStatus = document.querySelector('.popup__input_type_status');
@@ -24,8 +20,6 @@ const popupFullviewCaption = document.querySelector('.popup__caption');
 const gallery = document.querySelector('.gallery');
 const galleryCardTemplate = document.querySelector('#gallery__card').content;
 
-const buttonsClose = document.querySelectorAll('.button_type_close');
-
 initialCards.forEach((card) => {
   addCard(makeCard(card.place, card.link));
 });
@@ -34,9 +28,14 @@ function makeCard(place, link) {
   const galleryCard = galleryCardTemplate.querySelector('.gallery__card').cloneNode(true);
   const galleryImage = galleryCard.querySelector('.gallery__image');
   const galleryTitle = galleryCard.querySelector('.gallery__title');
+  const galleryButtonDelete = galleryCard.querySelector('.gallery__button-delete');
+  const galleryButtonLike = galleryCard.querySelector('.gallery__button-like');
   galleryTitle.textContent = place;
   galleryImage.alt = place;
   galleryImage.src = link;
+  galleryImage.addEventListener('click', openPopupFullview);
+  galleryButtonDelete.addEventListener('click', deleteCard);
+  galleryButtonLike.addEventListener('click', toggleLike);
   return galleryCard;
 }
 
@@ -45,34 +44,38 @@ function addCard(cardToAdd) {
 }
 
 function openPopup(popup) {
-  popup.classList.add('popup_opened');
+  popup.closest('.popup').classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup.closest('.popup').classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function openPopupFullview(evt) {
-  if (evt.target.classList.contains('gallery__image')) {
   fillPopupFullview(evt);
   openPopup(popupFullview);
+}
+
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
 function toggleLike(evt) {
-  if (evt.target.classList.contains('button_type_like')) {
   evt.target.classList.toggle('button_type_liked');
-  }
 }
 
 function deleteCard(evt) {
-  if (evt.target.classList.contains('gallery__button-delete')) {
   evt.target.closest('.gallery__card').remove();
-  }
 }
 
 function fillPopupFullview(evt) {
   popupFullviewImage.src = evt.target.src;
+  popupFullviewImage.alt = evt.target.alt;
   popupFullviewCaption.textContent = evt.target.alt;
 }
 
@@ -86,43 +89,37 @@ function changeProfile() {
   profileStatus.textContent = popupFormEditInputStatus.value;
 }
 
-gallery.addEventListener('click', deleteCard);
-gallery.addEventListener('click', toggleLike);
-gallery.addEventListener('click', openPopupFullview);
-
 profileButtonEdit.addEventListener('click', () => {
   fillPopupFormEdit();
-  openPopup(popupEdit);
+  openPopup(popupFormEdit);
 });
 
 profileButtonAdd.addEventListener('click', () => {
-  popupFormAdd.reset();
-  openPopup(popupAdd);
+  openPopup(popupFormAdd);
 });
 
-popupFormEdit.addEventListener('submit', () => {
+popupFormEdit.addEventListener('submit', (evt) => {
   changeProfile();
-  closePopup(popupEdit);
+  closePopup(evt.target);
 });
 
-popupFormAdd.addEventListener('submit', () => {
+popupFormAdd.addEventListener('submit', (evt) => {
   addCard(makeCard(popupFormAddInputPlace.value, popupFormAddInputLink.value));
-  closePopup(popupAdd);
-});
-
-buttonsClose.forEach((button) => {
-  button.addEventListener('click', (evt) => {
-    closePopup(evt.target.parentElement.parentElement);
-  });
+  closePopup(evt.target);
+  evt.target.reset();
+  if (popupFormAddInputPlace.value === '' || popupFormAddInputLink.value === '') {
+    evt.submitter.classList.add(validationSettings.inactiveButtonClass);
+    evt.submitter.disabled = true;
+  };
 });
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
-    closePopup(evt.target);
-  });
-  window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
+    if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup)
     }
-  });
+    if (evt.target.classList.contains('popup__button-close')) {
+      closePopup(popup)
+    }
+});
 });

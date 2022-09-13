@@ -9,6 +9,36 @@ const validationSettings = {
 
 enableValidation(validationSettings);
 
+function enableValidation(validationSettings) {
+  const popupForms = Array.from(document.querySelectorAll(validationSettings.formSelector));
+  popupForms.forEach((popupForm) => {
+    popupForm.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(popupForm, validationSettings);
+  });
+};
+
+function setEventListeners(popupForm, validationSettings) {
+  const popupInputs = Array.from(popupForm.querySelectorAll(validationSettings.inputSelector));
+  const popupButtonSubmit = popupForm.querySelector(validationSettings.submitButtonSelector);
+  toggleSubmitButton(popupInputs, popupButtonSubmit, validationSettings);
+  popupInputs.forEach((popupInput) => {
+    popupInput.addEventListener('input', () => {
+      validateInput(popupForm, popupInput, validationSettings);
+      toggleSubmitButton(popupInputs, popupButtonSubmit, validationSettings);
+    });
+  });
+};
+
+function validateInput(popupForm, popupInput, validationSettings) {
+  if (!popupInput.validity.valid) {
+    showPopupInputError(popupForm, popupInput, popupInput.validationMessage, validationSettings);
+  } else {
+    hidePopupInputError(popupForm, popupInput, validationSettings);
+  }
+};
+
 function showPopupInputError(popupForm, popupInput, errorMessage, validationSettings) {
   const inputError = popupForm.querySelector(`.${popupInput.id}-error`);
   popupInput.classList.add(validationSettings.inputErrorClass);
@@ -23,42 +53,6 @@ function hidePopupInputError(popupForm, popupInput, validationSettings) {
   inputError.textContent = '';
 };
 
-function validateInput(popupForm, popupInput) {
-  if (!popupInput.validity.valid) {
-    showPopupInputError(popupForm, popupInput, popupInput.validationMessage, validationSettings);
-  } else {
-    hidePopupInputError(popupForm, popupInput, validationSettings);
-  }
-};
-
-function setEventListeners(popupForm, validationSettings) {
-  const popupInputs = Array.from(popupForm.querySelectorAll(validationSettings.inputSelector));
-  const popupButtonSubmit = popupForm.querySelector(validationSettings.submitButtonSelector);
-  toggleSubmitButton(popupInputs, popupButtonSubmit, validationSettings);
-  popupInputs.forEach((popupInput) => {
-    popupInput.addEventListener('input', () => {
-      validateInput(popupForm, popupInput);
-      toggleSubmitButton(popupInputs, popupButtonSubmit, validationSettings);
-    });
-  });
-};
-
-function enableValidation(validationSettings) {
-  const popupForms = Array.from(document.querySelectorAll(validationSettings.formSelector));
-  popupForms.forEach((popupForm) => {
-    popupForm.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(popupForm, validationSettings);
-  });
-};
-
-function validateAllInputs(popupInputs) {
-  return popupInputs.some((popupInput) => {
-    return !popupInput.validity.valid;
-  })
-};
-
 function toggleSubmitButton (popupInputs, popupButtonSubmit, validationSettings) {
   if (validateAllInputs(popupInputs)) {
     popupButtonSubmit.classList.add(validationSettings.inactiveButtonClass);
@@ -68,3 +62,10 @@ function toggleSubmitButton (popupInputs, popupButtonSubmit, validationSettings)
     popupButtonSubmit.disabled = false;
   }
 };
+
+function validateAllInputs(popupInputs) {
+  return popupInputs.some((popupInput) => {
+    return !popupInput.validity.valid;
+  })
+};
+
