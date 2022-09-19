@@ -21,7 +21,8 @@ const gallery = document.querySelector('.gallery');
 const galleryCardTemplate = document.querySelector('#gallery__card').content;
 
 initialCards.forEach((card) => {
-  addCard(makeCard(card.place, card.link));
+  const initialCard = makeCard(card.place, card.link);
+  addCard(initialCard);
 });
 
 function makeCard(place, link) {
@@ -104,7 +105,8 @@ popupFormEdit.addEventListener('submit', (evt) => {
 });
 
 popupFormAdd.addEventListener('submit', (evt) => {
-  addCard(makeCard(popupFormAddInputPlace.value, popupFormAddInputLink.value));
+  const newGalleryCard = makeCard(popupFormAddInputPlace.value, popupFormAddInputLink.value);
+  addCard(newGalleryCard);
   closePopup(evt.target);
   evt.target.reset();
   if (popupFormAddInputPlace.value === '' || popupFormAddInputLink.value === '') {
