@@ -1,3 +1,15 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'button_type_submit-disabled',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error_visible'
+};
+
 const initialCards = [
   {
     place: 'Санкт-Петербург',
@@ -44,7 +56,8 @@ const popupFormAddInputLink = document.querySelector('.popup__input_type_link');
 
 const gallery = document.querySelector('.gallery');
 
-import { Card } from './Card.js';
+new FormValidator(validationSettings, popupFormEdit).enableValidation();
+new FormValidator(validationSettings, popupFormAdd).enableValidation();
 
 initialCards.forEach((card) => {
   const initialCard = new Card(card.place, card.link, '#gallery__card').makeCard();
@@ -127,18 +140,3 @@ popups.forEach((popup) => {
     }
 });
 });
-
-const validationSettings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-submit',
-  inactiveButtonClass: 'button_type_submit-disabled',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__error_visible'
-};
-
-import { FormValidator } from './FormValidator.js';
-
-new FormValidator(validationSettings, popupFormEdit).enableValidation();
-new FormValidator(validationSettings, popupFormAdd).enableValidation();
-
