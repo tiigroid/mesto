@@ -13,6 +13,13 @@ export class FormValidator {
       this._setEventListeners();
   };
 
+  resetValidation() {
+    this._toggleSubmitButton();
+    this._inputList.forEach((input) => {
+        this._hidePopupInputError(input)
+      });
+  }
+
   _setEventListeners() {
     this._toggleSubmitButton();
     this._inputList.forEach((input) => {
