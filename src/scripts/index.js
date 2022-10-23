@@ -1,5 +1,13 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import '../pages/index.css';
+
+import saintPetersburg from '../images/place_saint-petersburg.png';
+import newZeland from '../images/place_new-zealand.png';
+import morroBay from '../images/place_morro-bay.png';
+import capeBreton from '../images/place_cape-breton.png';
+import sanDiego from '../images/place_san-diego.png';
+import bayOfFires from '../images/place_bay-of-fires.png';
+import { Card } from '../scripts/Card.js';
+import { FormValidator } from '../scripts/FormValidator.js';
 
 const validationSettings = {
   formSelector: '.popup__form',
@@ -13,27 +21,27 @@ const validationSettings = {
 const initialCards = [
   {
     place: 'Санкт-Петербург',
-    link: 'https://images.unsplash.com/photo-1488278905738-514111aa236c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    link: saintPetersburg,
   },
   {
     place: 'Новая Зеландия',
-    link: 'https://images.unsplash.com/photo-1504064860048-974c8788c612?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
+    link: newZeland,
   },
   {
     place: 'Морро Бэй',
-    link: 'https://images.unsplash.com/photo-1597839271116-399cd739ddb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    link: morroBay,
   },
   {
     place: 'Кейп-Бретон',
-    link: 'https://images.unsplash.com/photo-1540913570178-23a49e4e8616?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    link: capeBreton,
   },
   {
     place: 'Сан-Диего',
-    link: 'https://images.unsplash.com/photo-1609994819063-e8de7339880b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    link: sanDiego,
   },
   {
     place: 'Залив Файерс',
-    link: 'https://images.unsplash.com/photo-1597762453091-4467f4b15761?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
+    link: bayOfFires,
   },
 ];
 
@@ -43,6 +51,10 @@ const profileButtonEdit = document.querySelector('.profile__button-edit');
 const profileButtonAdd = document.querySelector('.profile__button-add');
 
 const popups = document.querySelectorAll('.popup');
+
+const popupFullview = document.querySelector('.popup_type_fullview');
+const popupFullviewImage = document.querySelector('.popup__image');
+const popupFullviewCaption = document.querySelector('.popup__caption');
 
 const popupFormEdit = document.querySelector('.popup__form_type_edit');
 const popupFormEditInputName = document.querySelector('.popup__input_type_name');
@@ -74,7 +86,7 @@ initialCards.forEach((card) => {
 });
 
 function createCard(place, link) {
-  const card = new Card(place, link, '#gallery__card').generateCard();
+  const card = new Card(place, link, '#gallery__card', handleCardClick).generateCard();
   return card;
 }
 
@@ -82,7 +94,7 @@ function addCard(cardToAdd) {
   gallery.prepend(cardToAdd);
 }
 
-export function openPopup(popup) {
+function openPopup(popup) {
   popup.closest('.popup').classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
 }
@@ -107,6 +119,13 @@ function fillPopupFormEdit() {
 function changeProfile() {
   profileName.textContent = popupFormEditInputName.value;
   profileStatus.textContent = popupFormEditInputStatus.value;
+}
+
+function handleCardClick(place, link) {
+  popupFullviewImage.src = link;
+  popupFullviewImage.alt = place;
+  popupFullviewCaption.textContent = place;
+  openPopup(popupFullview);
 }
 
 profileButtonEdit.addEventListener('click', () => {

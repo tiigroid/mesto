@@ -1,14 +1,9 @@
-import { openPopup } from './index.js';
-
-const popupFullview = document.querySelector('.popup_type_fullview');
-const popupFullviewImage = document.querySelector('.popup__image');
-const popupFullviewCaption = document.querySelector('.popup__caption');
-
 export class Card {
-  constructor(place, link, templateSelector) {
+  constructor(place, link, templateSelector, handleCardClick) {
     this._place = place;
     this._link = link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   generateCard() {
@@ -41,7 +36,7 @@ export class Card {
       this._toggleLike();
     });
     this._galleryImage.addEventListener('click', () => {
-      this._openFullview();
+      this._handleCardClick(this._place, this._link);
     });
   }
 
@@ -51,13 +46,6 @@ export class Card {
 
   _toggleLike() {
     this._likeButton.classList.toggle('button_type_liked');
-  }
-
-  _openFullview() {
-    popupFullviewImage.src = this._link;
-    popupFullviewImage.alt = this._place;
-    popupFullviewCaption.textContent = this._place;
-    openPopup(popupFullview);
   }
 }
 
