@@ -47,15 +47,15 @@ const popupAdd = new PopupWithForm('.popup__form_type_add', (inputValues) => {
   popupAdd.close();
  });
 
+const popupFullview = new PopupWithImage('.popup__fullview');
+
 function createCard(place, link) {
   const card = new Card(place, link, '#gallery__card', handleCardClick).generateCard();
   return card;
 }
 
 function handleCardClick(place, link) {
-  const fullViewPopup = new PopupWithImage('.popup__fullview', place, link);
-  fullViewPopup.setEventListeners();
-  fullViewPopup.open();
+  popupFullview.open(place, link);
 }
 
 function fillPopupFormEdit() {
@@ -78,5 +78,6 @@ profileButtonAdd.addEventListener('click', () => {
 popupFormAddValidator.enableValidation();
 popupFormEditValidator.enableValidation();
 gallerySection.renderItems();
+popupFullview.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
