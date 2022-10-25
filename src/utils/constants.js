@@ -10,11 +10,6 @@ export const profileStatus = document.querySelector('.profile__status');
 export const profileButtonAdd = document.querySelector('.profile__button-add');
 export const profileButtonEdit = document.querySelector('.profile__button-edit');
 
-export const popupFormAdd = document.querySelector('.popup__form_type_add');
-export const popupFormEdit = document.querySelector('.popup__form_type_edit');
-export const popupFormEditInputName = document.querySelector('.popup__input_type_name');
-export const popupFormEditInputStatus = document.querySelector('.popup__input_type_status');
-
 export const initialCards = [
   {
     place: 'Санкт-Петербург',
@@ -50,3 +45,5 @@ export const validationSettings = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__error_visible'
 };
+
+export const formValidators = {};

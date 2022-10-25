@@ -39,14 +39,14 @@ export default class FormValidator {
   };
 
   _showPopupInputError(input, errorMessage) {
-    this._inputError = this._form.querySelector(`.${input.id}-error`);
+    this._inputError = this._form.querySelector(`.${input.name}-input-error`);
     input.classList.add(this._settings.inputErrorClass);
     this._inputError.classList.add(this._settings.errorClass);
     this._inputError.textContent = errorMessage;
   };
 
   _hidePopupInputError(input) {
-    this._inputError = this._form.querySelector(`.${input.id}-error`);
+    this._inputError = this._form.querySelector(`.${input.name}-input-error`);
     input.classList.remove(this._settings.inputErrorClass);
     this._inputError.classList.remove(this._settings.errorClass);
     this._inputError.textContent = '';

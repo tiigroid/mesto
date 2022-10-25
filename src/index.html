@@ -31,7 +31,7 @@
         <section class="gallery"></section>
       </main>
       <footer class="footer">© 2022 Mesto Russia</footer>
-      <section class="popup popup_type_form">
+      <section class="popup popup_type_form edit-profile-popup">
         <form novalidate name="edit-profile" class="popup__form popup__form_type_edit">
           <button
             aria-label="закрыть"
@@ -40,7 +40,7 @@
           ></button>
           <h3 class="popup__title">Редактировать профиль</h3>
           <input
-            id="name-input"
+            name="name"
             required
             minlength="2"
             maxlength="40"
@@ -49,7 +49,7 @@
           />
           <span class="name-input-error popup__error"></span>
           <input
-            id="status-input"
+            name="status"
             required
             minlength="2"
             maxlength="200"
@@ -65,7 +65,7 @@
           </button>
         </form>
       </section>
-      <section class="popup popup_type_form">
+      <section class="popup popup_type_form add-card-popup">
         <form novalidate name="add-card" class="popup__form popup__form_type_add">
           <button
             aria-label="закрыть"
@@ -74,7 +74,7 @@
           ></button>
           <h3 class="popup__title">Новое место</h3>
           <input
-            id="place-input"
+            name="place"
             required
             minlength="2"
             maxlength="30"
@@ -84,7 +84,7 @@
           />
           <span class="place-input-error popup__error"></span>
           <input
-            id="link-input"
+            name="link"
             required
             type="url"
             class="popup__input popup__input_type_link"
