@@ -1,0 +1,12 @@
+.profile__avatar-overlay {
+  height: 120px;
+  width: 120px;
+  background-color: rgba(0, 0, 0, .8);
+  background-image: url(../../../images/icon_edit.svg);
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  display: none;
+}

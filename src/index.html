@@ -12,7 +12,8 @@
       </header>
       <main class="content">
         <section class="profile">
-          <div class="profile__avatar"></div>
+          <img class="profile__avatar" src="<%=require('./images/avatar_cuskot.png')%>" alt="Аватар пользователя"></img>
+          <div class="profile__avatar-overlay"></div>
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кускот</h1>
             <p class="profile__status">Исследователь поддивана</p>
@@ -31,8 +32,8 @@
         <section class="gallery"></section>
       </main>
       <footer class="footer">© 2022 Mesto Russia</footer>
-      <section class="popup popup_type_form edit-profile-popup">
-        <form novalidate name="edit-profile" class="popup__form popup__form_type_edit">
+      <section class="popup popup_type_window edit-profile-popup">
+        <form novalidate name="edit-profile" class="popup__window popup__window_form">
           <button
             aria-label="закрыть"
             type="button"
@@ -45,7 +46,7 @@
             minlength="2"
             maxlength="40"
             type="text"
-            class="popup__input popup__input_type_name"
+            class="popup__input"
           />
           <span class="name-input-error popup__error"></span>
           <input
@@ -54,7 +55,7 @@
             minlength="2"
             maxlength="200"
             type="text"
-            class="popup__input popup__input_type_status"
+            class="popup__input"
           />
           <span class="status-input-error popup__error"></span>
           <button
@@ -65,8 +66,8 @@
           </button>
         </form>
       </section>
-      <section class="popup popup_type_form add-card-popup">
-        <form novalidate name="add-card" class="popup__form popup__form_type_add">
+      <section class="popup popup_type_window add-card-popup">
+        <form novalidate name="add-card" class="popup__window popup__window_form">
           <button
             aria-label="закрыть"
             type="button"
@@ -79,7 +80,7 @@
             minlength="2"
             maxlength="30"
             type="text"
-            class="popup__input popup__input_type_place"
+            class="popup__input"
             placeholder="Название"
           />
           <span class="place-input-error popup__error"></span>
@@ -87,7 +88,7 @@
             name="link"
             required
             type="url"
-            class="popup__input popup__input_type_link"
+            class="popup__input"
             placeholder="Ссылка на картинку"
           />
           <span class="link-input-error popup__error"></span>
@@ -98,6 +99,46 @@
             Создать
           </button>
         </form>
+      </section>
+      <section class="popup popup_type_window change-avatar-popup">
+        <form novalidate name="change-avatar" class="popup__window popup__window_form">
+          <button
+            aria-label="закрыть"
+            type="button"
+            class="popup__button-close button button_type_close"
+          ></button>
+          <h3 class="popup__title">Обновить аватар</h3>
+          <input
+            name="avatar"
+            required
+            type="url"
+            class="popup__input"
+            placeholder="Ссылка на картинку"
+          />
+          <span class="avatar-input-error popup__error"></span>
+          <button
+            type="submit"
+            class="popup__button-submit button button_type_submit"
+          >
+            Сохранить
+          </button>
+        </form>
+      </section>
+      <section class="popup popup_type_window delete-card-popup">
+          <div class="popup__window">
+            <button
+            aria-label="закрыть"
+            type="button"
+            class="popup__button-close button button_type_close"
+          ></button>
+          <h3 class="popup__title">Вы уверены?</h3>
+          <button
+            type="button"
+            class="popup__button-submit button button_type_submit"
+          >
+            Да
+          </button>
+        </div>
       </section>
       <section class="popup popup_type_fullview">
         <div class="popup__fullview">
@@ -120,11 +161,12 @@
           ></button>
           <div class="gallery__box">
             <h2 class="gallery__title"></h2>
-            <button
+            <div class="gallery__like">
+              <button
               aria-label="лайкнуть"
               type="button"
               class="gallery__button-like button button_type_like"
-            ></button>
+            ></button>0
           </div>
         </article>
       </template>

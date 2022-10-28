@@ -1,9 +1,11 @@
 export default class Card {
-  constructor(place, link, templateSelector, handleCardClick) {
+  constructor(place, link, templateSelector, handleCardClick, handleCardDelete) {
     this._place = place;
     this._link = link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   generateCard() {
@@ -30,7 +32,7 @@ export default class Card {
 
   _setEventListeners() {
     this._deleteButton.addEventListener('click', () => {
-      this._deleteCard();
+      this._handleCardDelete(this);
     });
     this._likeButton.addEventListener('click', () => {
       this._toggleLike();
@@ -40,7 +42,7 @@ export default class Card {
     });
   }
 
-  _deleteCard() {
+  deleteCard() {
     this._galleryCard.closest('.gallery__card').remove();
   }
 

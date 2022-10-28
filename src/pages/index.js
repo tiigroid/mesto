@@ -3,27 +3,30 @@ import '../pages/index.css';
 import {
   profileName,
   profileStatus,
+  profileAvatar,
+  profileAvatarOverlay,
   profileButtonAdd,
   profileButtonEdit,
   initialCards,
   validationSettings,
   formValidators
 }
-from '../utils/constants.js'
+from '../scripts/utils/constants.js'
 
-import Card from '../components/Card.js';
-import Section from '../components/Section.js';
-import FormValidator from '../components/FormValidator.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
+import Card from '../scripts/components/Card.js';
+import Section from '../scripts/components/Section.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import PopupWithDialoge from '../scripts/components/PopupWithDialoge.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
-const userInfo = new UserInfo({ name: profileName, status: profileStatus });
+const userInfo = new UserInfo({ name: profileName, status: profileStatus }, '.profile__avatar');
 
 const gallerySection = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data.place, data.link, '#gallery__card', handleCardClick).generateCard();
+    const card = new Card(data.place, data.link, '#gallery__card', handleCardClick, handleCardDelete).generateCard();
     gallerySection.addItem(card);
     }
   },
@@ -43,11 +46,25 @@ const popupAdd = new PopupWithForm('.add-card-popup', (inputValues) => {
  });
 popupAdd.setEventListeners();
 
+const popupAvatar = new PopupWithForm('.change-avatar-popup', (inputValues) => {
+  userInfo.changeUserAvatar(inputValues);
+  popupAvatar.close();
+});
+popupAvatar.setEventListeners();
+
+const popupDeleteCard = new PopupWithDialoge('.delete-card-popup');
+popupDeleteCard.setEventListeners();
+
 const popupFullview = new PopupWithImage('.popup_type_fullview');
 popupFullview.setEventListeners();
 
 function handleCardClick(place, link) {
   popupFullview.open(place, link);
+}
+
+function handleCardDelete(card) {
+  popupDeleteCard.open();
+  popupDeleteCard.confirmAction(card.deleteCard);
 }
 
 profileButtonEdit.addEventListener('click', () => {
@@ -59,6 +76,19 @@ profileButtonEdit.addEventListener('click', () => {
 profileButtonAdd.addEventListener('click', () => {
   formValidators['add-card'].resetValidation();
   popupAdd.open();
+});
+
+profileAvatar.addEventListener('mouseover', () => {
+  profileAvatarOverlay.classList.add('profile__avatar-overlay_visible');
+});
+
+profileAvatarOverlay.addEventListener('click', () => {
+  formValidators['change-avatar'].resetValidation();
+  popupAvatar.open();
+});
+
+profileAvatarOverlay.addEventListener('mouseout', () => {
+  profileAvatarOverlay.classList.remove('profile__avatar-overlay_visible');
 });
 
 function enableValidation(settings) {

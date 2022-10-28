@@ -1,8 +1,8 @@
 .profile__avatar {
-  background-image: url(../../../images/avatar_cuskot.png);
-  background-position: center;
-  background-size: cover;
   border-radius: 50%;
   height: 120px;
   width: 120px;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  cursor: pointer;
 }
