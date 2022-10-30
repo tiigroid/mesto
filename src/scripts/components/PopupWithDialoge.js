@@ -10,6 +10,7 @@ export default class PopupWithDialoge extends Popup {
     this._confirmButton.addEventListener('click', () => {
       action();
       this.close();
-    })
+    },
+    {once: true})
   }
 }

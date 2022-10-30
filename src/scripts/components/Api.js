@@ -5,7 +5,6 @@ export default class Api {
     this._authorization = headers.authorization;
     this._checkResponse = (res) =>
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-    this._catchError = (err) => Promise.reject(err);
   }
 
   getUserData() {
@@ -13,7 +12,6 @@ export default class Api {
       headers: { authorization: this._authorization },
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   patchUserData(data) {
@@ -26,7 +24,6 @@ export default class Api {
       }),
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   patchUserAvatar(data) {
@@ -38,7 +35,6 @@ export default class Api {
       }),
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   getInitialCards() {
@@ -46,7 +42,6 @@ export default class Api {
       headers: { authorization: this._authorization },
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   postCard(data) {
@@ -59,7 +54,6 @@ export default class Api {
       }),
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   deleteCard(cardId) {
@@ -68,7 +62,6 @@ export default class Api {
       headers: { authorization: this._authorization },
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   putCardLike(cardId) {
@@ -77,7 +70,6 @@ export default class Api {
       headers: { authorization: this._authorization },
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 
   deleteCardLike(cardId) {
@@ -86,6 +78,5 @@ export default class Api {
       headers: { authorization: this._authorization },
     })
       .then(this._checkResponse)
-      .catch(this._catchError);
   }
 }
