@@ -25,7 +25,7 @@
 @import url(../blocks/profile/__avatar-overlay/_visible/profile__avatar-overlay_visible.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
-@import url(../blocks/profile/__status/profile__status.css);
+@import url(../blocks/profile/__about/profile__about.css);
 @import url(../blocks/profile/__button-edit/profile__button-edit.css);
 @import url(../blocks/profile/__button-add/profile__button-add.css);
 

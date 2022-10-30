@@ -1,7 +1,4 @@
 .gallery__like {
-display: flex;
-flex-direction: column;
-justify-content: space-between;
 font-weight: 400;
 font-size: 13px;
 line-height: 13px;

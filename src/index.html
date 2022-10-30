@@ -12,11 +12,11 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" src="<%=require('./images/avatar_cuskot.png')%>" alt="Аватар пользователя"></img>
+          <img class="profile__avatar" src="#" alt="Аватар пользователя"></img>
           <div class="profile__avatar-overlay"></div>
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кускот</h1>
-            <p class="profile__status">Исследователь поддивана</p>
+            <h1 class="profile__name"></h1>
+            <p class="profile__about"></p>
             <button
               aria-label="редактировать профиль"
               type="button"
@@ -50,14 +50,14 @@
           />
           <span class="name-input-error popup__error"></span>
           <input
-            name="status"
+            name="about"
             required
             minlength="2"
             maxlength="200"
             type="text"
             class="popup__input"
           />
-          <span class="status-input-error popup__error"></span>
+          <span class="about-input-error popup__error"></span>
           <button
             type="submit"
             class="popup__button-submit button button_type_submit"
@@ -75,7 +75,7 @@
           ></button>
           <h3 class="popup__title">Новое место</h3>
           <input
-            name="place"
+            name="name"
             required
             minlength="2"
             maxlength="30"
@@ -83,7 +83,7 @@
             class="popup__input"
             placeholder="Название"
           />
-          <span class="place-input-error popup__error"></span>
+          <span class="name-input-error popup__error"></span>
           <input
             name="link"
             required
@@ -161,12 +161,14 @@
           ></button>
           <div class="gallery__box">
             <h2 class="gallery__title"></h2>
-            <div class="gallery__like">
+            <div class="gallery__like-box">
               <button
               aria-label="лайкнуть"
               type="button"
               class="gallery__button-like button button_type_like"
-            ></button>0
+            ></button>
+            <div class="gallery__like">0</div>
+            </div>
           </div>
         </article>
       </template>
