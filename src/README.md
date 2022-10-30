@@ -15,4 +15,4 @@
 * Форму обратной связи;
 * Что-нибудь еще :) Нет предела совершенству.
 
-### [Проект на GitHub Pages](https://tiigroid.github.io/mesto/index.html)
+### [Проект на GitHub Pages](https://tiigroid.github.io/mesto/)
