@@ -1,16 +1,29 @@
 import Popup from './Popup.js';
 
 export default class PopupWithDialoge extends Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, processingMessage) {
     super(popupSelector);
     this._confirmButton = this._popup.querySelector('.popup__button-submit');
+    this._defaultButtonText = this._confirmButton.textContent;
+    this._processingMessage = processingMessage;
    }
 
-  confirmAction(action) {
+  setEventListeners() {
+    super.setEventListeners()
     this._confirmButton.addEventListener('click', () => {
-      action();
-      this.close();
-    },
-    {once: true})
+      this._handler();
+    })
+  }
+
+  setNewHandler(action) {
+    this._handler = action;
+  }
+
+  renderLoading(isLoading) {
+    if(isLoading) {
+      this._confirmButton.textContent = this._processingMessage;
+    } else {
+      this._confirmButton.textContent = this._defaultButtonText;
+    }
   }
 }

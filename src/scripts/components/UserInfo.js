@@ -1,34 +1,26 @@
 export default class UserInfo {
-  constructor (name, about, avatar, api) {
+  constructor ( name, about, avatar) {
     this._name = name;
     this._about = about;
     this._avatar = avatar;
-    this._api = api;
   }
 
-  getUserInfo() {
-    const user = {};
-    user.name = this._name.textContent;
-    user.about = this._about.textContent;
+  getUserInfo(data) {
+    let user = {};
+    user.name = data.name;
+    user.about = data.about;
+    user.avatar = data.avatar;
+    user._id = data._id;
     return user;
   }
 
-  setUserInfo() {
-    this._api.getUserData()
-    .then((data) => this.renderUserInfo(data))
-  }
-
-  renderUserInfo(data) {
+  setUserInfo(data) {
     this._name.textContent = data.name;
     this._about.textContent = data.about;
+    this.setUserAvatar(data);
   }
 
-  setUserAvatar() {
-    this._api.getUserData()
-    .then((data) => this.renderUserAvatar(data))
-  }
-
-  renderUserAvatar(data) {
+  setUserAvatar(data) {
     this._avatar.src = data.avatar;
   }
 }

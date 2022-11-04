@@ -15,11 +15,11 @@ from '../scripts/utils/constants.js'
 import Api from '../scripts/components/Api.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
-import FormValidator from '../scripts/components/FormValidator.js';
-import PopupWithDialoge from '../scripts/components/PopupWithDialoge.js';
-import PopupWithImage from '../scripts/components/PopupWithImage.js';
-import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithDialoge from '../scripts/components/PopupWithDialoge.js';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-52',
@@ -29,13 +29,22 @@ const api = new Api({
   }
 });
 
+let thisUser;
+
+Promise.all([api.getUserData(), api.getInitialCards()])
+.then(([userData, initialCards]) => {
+  thisUser = userData;
+  userInfo.getUserInfo(thisUser);
+  userInfo.setUserInfo(thisUser);
+  userInfo.setUserAvatar(thisUser);
+  gallerySection.renderItems(initialCards.reverse());
+})
+.catch(err => alert(err));
 
 
 // User Information
 
-const userInfo = new UserInfo(profileName, profileAbout, profileAvatar, api);
-userInfo.setUserInfo();
-userInfo.setUserAvatar();
+const userInfo = new UserInfo(profileName, profileAbout, profileAvatar);
 
 
 // New Popups
@@ -43,23 +52,28 @@ userInfo.setUserAvatar();
 const popupEditProfile = new PopupWithForm('.edit-profile-popup', (inputValues) => {
   popupEditProfile.renderLoading(true);
   api.patchUserData(inputValues)
-  .then((data) => userInfo.renderUserInfo(data))
+  .then(userData => {
+    thisUser = userData;
+    userInfo.setUserInfo(thisUser);
+  })
   .then(() => popupEditProfile.close())
-  .catch((err) => alert(err))
+  .catch(err => alert(err))
   .finally(() => setTimeout(() => popupEditProfile.renderLoading(false), 200));
 });
+// setTimeout создан не ради отсрочки вызова функции, а в связи с плавным затуханием попапов,
+// которое выставлено в css на те же 200 мс через transition и visibility -
+// в противном случае можно успеть заметить возвращение слова "Сохранить" на кнопке, хотя для скрипта окно уже "закрыто" :)
 popupEditProfile.setEventListeners();
 
 
 const popupAddCard = new PopupWithForm('.add-card-popup', (inputValues) => {
   popupAddCard.renderLoading(true);
   api.postCard(inputValues)
-  .then((data) => {
-    const card = new Card('#gallery__card', data, api, cardHandlers).generateCard();
-    gallerySection.addItem(card);
+  .then(cardData => {
+    gallerySection.renderItem(cardData);
   })
   .then(() => popupAddCard.close())
-  .catch((err) => alert(err))
+  .catch(err => alert(err))
   .finally(() => setTimeout(() => popupAddCard.renderLoading(false), 200));
 });
 popupAddCard.setEventListeners();
@@ -68,15 +82,15 @@ popupAddCard.setEventListeners();
 const popupAvatar = new PopupWithForm('.change-avatar-popup', (inputValues) => {
   popupAvatar.renderLoading(true);
   api.patchUserAvatar(inputValues)
-  .then((data) => userInfo.renderUserAvatar(data))
+  .then(data => userInfo.setUserAvatar(data))
   .then(() => popupAvatar.close())
-  .catch((err) => alert(err))
+  .catch(err => alert(err))
   .finally(() => setTimeout(() => popupAvatar.renderLoading(false), 200))
 });
 popupAvatar.setEventListeners();
 
 
-const popupDeleteCard = new PopupWithDialoge('.delete-card-popup');
+const popupDeleteCard = new PopupWithDialoge('.delete-card-popup', 'Удаление...');
 popupDeleteCard.setEventListeners();
 
 
@@ -86,21 +100,13 @@ popupFullview.setEventListeners();
 
 // New Sections
 
-const gallerySection = new Section('.gallery', () => {
-  api.getInitialCards()
-  .then((data) => {
-    const initialCards = data.reverse();
-    initialCards.forEach((item) => {
-    const card = new Card('#gallery__card', item, api, cardHandlers).generateCard();
-    gallerySection.addItem(card);
-    })
-  })
-  .catch((err) => alert(err));
+const gallerySection = new Section('.gallery', (card) => {
+  const newCard = new Card('#gallery__card', card, cardHandlers, thisUser).generateCard();
+  gallerySection.addItem(newCard);
 });
-gallerySection.renderItems();
 
 
-// Card Handling functions
+// Card handling functions
 
 const cardHandlers = {
 
@@ -108,18 +114,36 @@ const cardHandlers = {
     popupFullview.open(card.name, card.link);
   },
 
+  putCardLike(card) {
+    api.putCardLike(card._id)
+    .then(res => card.renderLike(res))
+    .catch(err => alert(err));
+  },
+
+  deleteCardLike(card) {
+    api.deleteCardLike(card._id)
+    .then(res => card.renderLike(res))
+    .catch(err => alert(err));
+  },
+
   handleCardDelete(card) {
     popupDeleteCard.open();
-    popupDeleteCard.confirmAction(card.deleteCard);
+    popupDeleteCard.setNewHandler(() => {
+      popupDeleteCard.renderLoading(true);
+      api.deleteCard(card._id)
+      .then(() => card.deleteCard())
+      .then(() => popupDeleteCard.close())
+      .catch(err => alert(err))
+      .finally(() => setTimeout(() => popupDeleteCard.renderLoading(false), 200));
+    });
   }
 }
 
 
 // Event Listeners
 
-
 profileButtonEdit.addEventListener('click', () => {
-  popupEditProfile.setInputValues(userInfo.getUserInfo());
+  popupEditProfile.setInputValues(userInfo.getUserInfo(thisUser));
   formValidators['edit-profile'].resetValidation();
   popupEditProfile.open();
 });
@@ -129,26 +153,17 @@ profileButtonAdd.addEventListener('click', () => {
   popupAddCard.open();
 });
 
-profileAvatar.addEventListener('mouseover', () => {
-  profileAvatarOverlay.classList.add('profile__avatar-overlay_visible');
-});
-
 profileAvatarOverlay.addEventListener('click', () => {
   formValidators['change-avatar'].resetValidation();
   popupAvatar.open();
 });
-
-profileAvatarOverlay.addEventListener('mouseout', () => {
-  profileAvatarOverlay.classList.remove('profile__avatar-overlay_visible');
-});
-
 
 
 // Form Validation
 
 function enableValidation(settings) {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
-  formList.forEach((form) => {
+  formList.forEach(form => {
     const validator = new FormValidator(settings, form);
     const formName = form.getAttribute('name');
     formValidators[formName] = validator;
