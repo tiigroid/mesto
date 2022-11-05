@@ -41,7 +41,7 @@ export default class PopupWithForm extends Popup {
     if(isLoading) {
       this._submitButton.textContent = 'Сохранение...'
     } else {
-      this._submitButton.textContent = this._defaultButtonText;
+      setTimeout(() => this._submitButton.textContent = this._defaultButtonText, 200);
     }
   }
 }

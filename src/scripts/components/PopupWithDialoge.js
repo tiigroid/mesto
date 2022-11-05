@@ -23,7 +23,7 @@ export default class PopupWithDialoge extends Popup {
     if(isLoading) {
       this._confirmButton.textContent = this._processingMessage;
     } else {
-      this._confirmButton.textContent = this._defaultButtonText;
+      setTimeout(() => this._confirmButton.textContent = this._defaultButtonText, 200);
     }
   }
 }

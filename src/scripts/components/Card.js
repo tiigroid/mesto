@@ -7,7 +7,7 @@ export default class Card {
     this._link = data.link;
     this._likes = data.likes;
     this._id = data._id;
-    this._owner = data.owner._id;
+    this._cardOwner = data.owner._id;
 
     this._user = thisUser;
 
@@ -31,7 +31,7 @@ export default class Card {
     this._galleryImage.src = this._link;
     this._likeValue.textContent = this._likes.length;
 
-    if(this._owner !== this._user._id)  {
+    if(this._cardOwner !== this._user._id)  {
       this._deleteButton.remove();
     }
 

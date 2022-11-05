@@ -34,7 +34,6 @@ let thisUser;
 Promise.all([api.getUserData(), api.getInitialCards()])
 .then(([userData, initialCards]) => {
   thisUser = userData;
-  userInfo.getUserInfo(thisUser);
   userInfo.setUserInfo(thisUser);
   userInfo.setUserAvatar(thisUser);
   gallerySection.renderItems(initialCards.reverse());
@@ -55,14 +54,11 @@ const popupEditProfile = new PopupWithForm('.edit-profile-popup', (inputValues) 
   .then(userData => {
     thisUser = userData;
     userInfo.setUserInfo(thisUser);
+    popupEditProfile.close();
   })
-  .then(() => popupEditProfile.close())
   .catch(err => alert(err))
-  .finally(() => setTimeout(() => popupEditProfile.renderLoading(false), 200));
+  .finally(() => popupEditProfile.renderLoading(false));
 });
-// setTimeout создан не ради отсрочки вызова функции, а в связи с плавным затуханием попапов,
-// которое выставлено в css на те же 200 мс через transition и visibility -
-// в противном случае можно успеть заметить возвращение слова "Сохранить" на кнопке, хотя для скрипта окно уже "закрыто" :)
 popupEditProfile.setEventListeners();
 
 
@@ -71,10 +67,10 @@ const popupAddCard = new PopupWithForm('.add-card-popup', (inputValues) => {
   api.postCard(inputValues)
   .then(cardData => {
     gallerySection.renderItem(cardData);
+    popupAddCard.close();
   })
-  .then(() => popupAddCard.close())
   .catch(err => alert(err))
-  .finally(() => setTimeout(() => popupAddCard.renderLoading(false), 200));
+  .finally(() => popupAddCard.renderLoading(false));
 });
 popupAddCard.setEventListeners();
 
@@ -82,10 +78,12 @@ popupAddCard.setEventListeners();
 const popupAvatar = new PopupWithForm('.change-avatar-popup', (inputValues) => {
   popupAvatar.renderLoading(true);
   api.patchUserAvatar(inputValues)
-  .then(data => userInfo.setUserAvatar(data))
-  .then(() => popupAvatar.close())
+  .then(userData => {
+    userInfo.setUserAvatar(userData);
+    popupAvatar.close();
+  })
   .catch(err => alert(err))
-  .finally(() => setTimeout(() => popupAvatar.renderLoading(false), 200))
+  .finally(() => popupAvatar.renderLoading(false))
 });
 popupAvatar.setEventListeners();
 
@@ -143,7 +141,7 @@ const cardHandlers = {
 // Event Listeners
 
 profileButtonEdit.addEventListener('click', () => {
-  popupEditProfile.setInputValues(userInfo.getUserInfo(thisUser));
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
   formValidators['edit-profile'].resetValidation();
   popupEditProfile.open();
 });

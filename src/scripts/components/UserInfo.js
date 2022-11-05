@@ -5,16 +5,8 @@ export default class UserInfo {
     this._avatar = avatar;
   }
 
-  getUserInfo(data) {
-    let user = {};
-    user.name = data.name;
-    user.about = data.about;
-    user.avatar = data.avatar;
-    user._id = data._id;
-    return user;
-  }
-
   setUserInfo(data) {
+    this._id = data._id;
     this._name.textContent = data.name;
     this._about.textContent = data.about;
     this.setUserAvatar(data);
@@ -22,5 +14,14 @@ export default class UserInfo {
 
   setUserAvatar(data) {
     this._avatar.src = data.avatar;
+  }
+
+  getUserInfo() {
+    const user = {};
+    user.name = this._name.textContent;
+    user.about = this._about.textContent;;
+    user.avatar = this._avatar.src;
+    user._id = this._id;
+    return user;
   }
 }
